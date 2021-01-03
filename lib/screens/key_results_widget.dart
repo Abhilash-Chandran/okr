@@ -4,6 +4,7 @@ import 'package:get_it/get_it.dart';
 import 'package:number_inc_dec/number_inc_dec.dart';
 import 'package:okr/managers/objectives_manager.dart';
 import 'package:okr/models/objective.dart';
+import 'dart:math' show pi;
 
 class KeyResultsWidget extends StatefulWidget {
   final Objective objective;
@@ -47,7 +48,6 @@ class _KeyResultsWidgetState extends State<KeyResultsWidget> {
             _progressControllers
                 .add(TextEditingController(text: element.progress.toString()));
           });
-          print('editmode for ${widget.objective.id} is $editMode');
           return Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
@@ -111,6 +111,11 @@ class _KeyResultsWidgetState extends State<KeyResultsWidget> {
                                     CircularProgressIndicator(
                                       value: keyResult.progress / 10,
                                     ),
+                                    // Container(
+                                    //     height: 20,
+                                    //     width: 20,
+                                    //     child: ProgressWidget(
+                                    //         keyResult: keyResult)),
                                     Text(keyResult.progress.toString())
                                   ],
                                 ),
@@ -211,5 +216,54 @@ class _KeyResultsWidgetState extends State<KeyResultsWidget> {
             ],
           );
         });
+  }
+}
+
+class ProgressWidget extends StatelessWidget {
+  const ProgressWidget({
+    Key key,
+    @required this.keyResult,
+  }) : super(key: key);
+
+  final KeyResult keyResult;
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomPaint(
+      painter: ProgressPainter(percentage: keyResult.progress / 10),
+    );
+  }
+}
+
+class ProgressPainter extends CustomPainter {
+  double percentage;
+  ProgressPainter({@required this.percentage});
+  @override
+  void paint(Canvas canvas, Size size) {
+    Paint paint = Paint()..color = Colors.blue;
+    Offset center = Offset(size.height / 2, size.width / 2);
+    canvas.drawCircle(
+        center,
+        size.width / 2,
+        Paint()
+          ..color = Colors.black
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = 3);
+    canvas.drawArc(
+      Rect.fromCenter(
+        center: center,
+        height: size.height,
+        width: size.width,
+      ),
+      0,
+      3 * pi / 2,
+      true,
+      paint,
+    );
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) {
+    return true;
   }
 }
