@@ -11,8 +11,8 @@ class ObjectivesGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
-      bool small = constraints.maxWidth <= 360;
-      bool medium = constraints.maxWidth > 360 && constraints.maxWidth <= 760;
+      bool small = constraints.maxWidth <= 414;
+      bool medium = constraints.maxWidth > 414 && constraints.maxWidth <= 760;
       // bool large = constraints.maxWidth > 760;
       return Column(
         children: [

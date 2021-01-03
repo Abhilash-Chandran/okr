@@ -158,231 +158,6 @@ abstract class _Objectives implements Objectives {
   _$ObjectivesCopyWith<_Objectives> get copyWith;
 }
 
-Objective _$ObjectiveFromJson(Map<String, dynamic> json) {
-  return _Objective.fromJson(json);
-}
-
-/// @nodoc
-class _$ObjectiveTearOff {
-  const _$ObjectiveTearOff();
-
-// ignore: unused_element
-  _Objective call(String id, int sortIndex, bool editMode, String title,
-      List<KeyResult> keyResults) {
-    return _Objective(
-      id,
-      sortIndex,
-      editMode,
-      title,
-      keyResults,
-    );
-  }
-
-// ignore: unused_element
-  Objective fromJson(Map<String, Object> json) {
-    return Objective.fromJson(json);
-  }
-}
-
-/// @nodoc
-// ignore: unused_element
-const $Objective = _$ObjectiveTearOff();
-
-/// @nodoc
-mixin _$Objective {
-  String get id;
-  int get sortIndex;
-  bool get editMode;
-  String get title;
-  List<KeyResult> get keyResults;
-
-  Map<String, dynamic> toJson();
-  $ObjectiveCopyWith<Objective> get copyWith;
-}
-
-/// @nodoc
-abstract class $ObjectiveCopyWith<$Res> {
-  factory $ObjectiveCopyWith(Objective value, $Res Function(Objective) then) =
-      _$ObjectiveCopyWithImpl<$Res>;
-  $Res call(
-      {String id,
-      int sortIndex,
-      bool editMode,
-      String title,
-      List<KeyResult> keyResults});
-}
-
-/// @nodoc
-class _$ObjectiveCopyWithImpl<$Res> implements $ObjectiveCopyWith<$Res> {
-  _$ObjectiveCopyWithImpl(this._value, this._then);
-
-  final Objective _value;
-  // ignore: unused_field
-  final $Res Function(Objective) _then;
-
-  @override
-  $Res call({
-    Object id = freezed,
-    Object sortIndex = freezed,
-    Object editMode = freezed,
-    Object title = freezed,
-    Object keyResults = freezed,
-  }) {
-    return _then(_value.copyWith(
-      id: id == freezed ? _value.id : id as String,
-      sortIndex: sortIndex == freezed ? _value.sortIndex : sortIndex as int,
-      editMode: editMode == freezed ? _value.editMode : editMode as bool,
-      title: title == freezed ? _value.title : title as String,
-      keyResults: keyResults == freezed
-          ? _value.keyResults
-          : keyResults as List<KeyResult>,
-    ));
-  }
-}
-
-/// @nodoc
-abstract class _$ObjectiveCopyWith<$Res> implements $ObjectiveCopyWith<$Res> {
-  factory _$ObjectiveCopyWith(
-          _Objective value, $Res Function(_Objective) then) =
-      __$ObjectiveCopyWithImpl<$Res>;
-  @override
-  $Res call(
-      {String id,
-      int sortIndex,
-      bool editMode,
-      String title,
-      List<KeyResult> keyResults});
-}
-
-/// @nodoc
-class __$ObjectiveCopyWithImpl<$Res> extends _$ObjectiveCopyWithImpl<$Res>
-    implements _$ObjectiveCopyWith<$Res> {
-  __$ObjectiveCopyWithImpl(_Objective _value, $Res Function(_Objective) _then)
-      : super(_value, (v) => _then(v as _Objective));
-
-  @override
-  _Objective get _value => super._value as _Objective;
-
-  @override
-  $Res call({
-    Object id = freezed,
-    Object sortIndex = freezed,
-    Object editMode = freezed,
-    Object title = freezed,
-    Object keyResults = freezed,
-  }) {
-    return _then(_Objective(
-      id == freezed ? _value.id : id as String,
-      sortIndex == freezed ? _value.sortIndex : sortIndex as int,
-      editMode == freezed ? _value.editMode : editMode as bool,
-      title == freezed ? _value.title : title as String,
-      keyResults == freezed ? _value.keyResults : keyResults as List<KeyResult>,
-    ));
-  }
-}
-
-@JsonSerializable()
-
-/// @nodoc
-class _$_Objective with DiagnosticableTreeMixin implements _Objective {
-  const _$_Objective(
-      this.id, this.sortIndex, this.editMode, this.title, this.keyResults)
-      : assert(id != null),
-        assert(sortIndex != null),
-        assert(editMode != null),
-        assert(title != null),
-        assert(keyResults != null);
-
-  factory _$_Objective.fromJson(Map<String, dynamic> json) =>
-      _$_$_ObjectiveFromJson(json);
-
-  @override
-  final String id;
-  @override
-  final int sortIndex;
-  @override
-  final bool editMode;
-  @override
-  final String title;
-  @override
-  final List<KeyResult> keyResults;
-
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Objective(id: $id, sortIndex: $sortIndex, editMode: $editMode, title: $title, keyResults: $keyResults)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'Objective'))
-      ..add(DiagnosticsProperty('id', id))
-      ..add(DiagnosticsProperty('sortIndex', sortIndex))
-      ..add(DiagnosticsProperty('editMode', editMode))
-      ..add(DiagnosticsProperty('title', title))
-      ..add(DiagnosticsProperty('keyResults', keyResults));
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is _Objective &&
-            (identical(other.id, id) ||
-                const DeepCollectionEquality().equals(other.id, id)) &&
-            (identical(other.sortIndex, sortIndex) ||
-                const DeepCollectionEquality()
-                    .equals(other.sortIndex, sortIndex)) &&
-            (identical(other.editMode, editMode) ||
-                const DeepCollectionEquality()
-                    .equals(other.editMode, editMode)) &&
-            (identical(other.title, title) ||
-                const DeepCollectionEquality().equals(other.title, title)) &&
-            (identical(other.keyResults, keyResults) ||
-                const DeepCollectionEquality()
-                    .equals(other.keyResults, keyResults)));
-  }
-
-  @override
-  int get hashCode =>
-      runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(id) ^
-      const DeepCollectionEquality().hash(sortIndex) ^
-      const DeepCollectionEquality().hash(editMode) ^
-      const DeepCollectionEquality().hash(title) ^
-      const DeepCollectionEquality().hash(keyResults);
-
-  @override
-  _$ObjectiveCopyWith<_Objective> get copyWith =>
-      __$ObjectiveCopyWithImpl<_Objective>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$_$_ObjectiveToJson(this);
-  }
-}
-
-abstract class _Objective implements Objective {
-  const factory _Objective(String id, int sortIndex, bool editMode,
-      String title, List<KeyResult> keyResults) = _$_Objective;
-
-  factory _Objective.fromJson(Map<String, dynamic> json) =
-      _$_Objective.fromJson;
-
-  @override
-  String get id;
-  @override
-  int get sortIndex;
-  @override
-  bool get editMode;
-  @override
-  String get title;
-  @override
-  List<KeyResult> get keyResults;
-  @override
-  _$ObjectiveCopyWith<_Objective> get copyWith;
-}
-
 KeyResult _$KeyResultFromJson(Map<String, dynamic> json) {
   return _KeyResult.fromJson(json);
 }
@@ -544,4 +319,205 @@ abstract class _KeyResult implements KeyResult {
   double get progress;
   @override
   _$KeyResultCopyWith<_KeyResult> get copyWith;
+}
+
+Objective _$ObjectiveFromJson(Map<String, dynamic> json) {
+  return _Objective.fromJson(json);
+}
+
+/// @nodoc
+class _$ObjectiveTearOff {
+  const _$ObjectiveTearOff();
+
+// ignore: unused_element
+  _Objective call(
+      String id, int sortIndex, String title, List<KeyResult> keyResults) {
+    return _Objective(
+      id,
+      sortIndex,
+      title,
+      keyResults,
+    );
+  }
+
+// ignore: unused_element
+  Objective fromJson(Map<String, Object> json) {
+    return Objective.fromJson(json);
+  }
+}
+
+/// @nodoc
+// ignore: unused_element
+const $Objective = _$ObjectiveTearOff();
+
+/// @nodoc
+mixin _$Objective {
+  String get id;
+  int get sortIndex;
+  String get title;
+  List<KeyResult> get keyResults;
+
+  Map<String, dynamic> toJson();
+  $ObjectiveCopyWith<Objective> get copyWith;
+}
+
+/// @nodoc
+abstract class $ObjectiveCopyWith<$Res> {
+  factory $ObjectiveCopyWith(Objective value, $Res Function(Objective) then) =
+      _$ObjectiveCopyWithImpl<$Res>;
+  $Res call(
+      {String id, int sortIndex, String title, List<KeyResult> keyResults});
+}
+
+/// @nodoc
+class _$ObjectiveCopyWithImpl<$Res> implements $ObjectiveCopyWith<$Res> {
+  _$ObjectiveCopyWithImpl(this._value, this._then);
+
+  final Objective _value;
+  // ignore: unused_field
+  final $Res Function(Objective) _then;
+
+  @override
+  $Res call({
+    Object id = freezed,
+    Object sortIndex = freezed,
+    Object title = freezed,
+    Object keyResults = freezed,
+  }) {
+    return _then(_value.copyWith(
+      id: id == freezed ? _value.id : id as String,
+      sortIndex: sortIndex == freezed ? _value.sortIndex : sortIndex as int,
+      title: title == freezed ? _value.title : title as String,
+      keyResults: keyResults == freezed
+          ? _value.keyResults
+          : keyResults as List<KeyResult>,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$ObjectiveCopyWith<$Res> implements $ObjectiveCopyWith<$Res> {
+  factory _$ObjectiveCopyWith(
+          _Objective value, $Res Function(_Objective) then) =
+      __$ObjectiveCopyWithImpl<$Res>;
+  @override
+  $Res call(
+      {String id, int sortIndex, String title, List<KeyResult> keyResults});
+}
+
+/// @nodoc
+class __$ObjectiveCopyWithImpl<$Res> extends _$ObjectiveCopyWithImpl<$Res>
+    implements _$ObjectiveCopyWith<$Res> {
+  __$ObjectiveCopyWithImpl(_Objective _value, $Res Function(_Objective) _then)
+      : super(_value, (v) => _then(v as _Objective));
+
+  @override
+  _Objective get _value => super._value as _Objective;
+
+  @override
+  $Res call({
+    Object id = freezed,
+    Object sortIndex = freezed,
+    Object title = freezed,
+    Object keyResults = freezed,
+  }) {
+    return _then(_Objective(
+      id == freezed ? _value.id : id as String,
+      sortIndex == freezed ? _value.sortIndex : sortIndex as int,
+      title == freezed ? _value.title : title as String,
+      keyResults == freezed ? _value.keyResults : keyResults as List<KeyResult>,
+    ));
+  }
+}
+
+@JsonSerializable()
+
+/// @nodoc
+class _$_Objective with DiagnosticableTreeMixin implements _Objective {
+  const _$_Objective(this.id, this.sortIndex, this.title, this.keyResults)
+      : assert(id != null),
+        assert(sortIndex != null),
+        assert(title != null),
+        assert(keyResults != null);
+
+  factory _$_Objective.fromJson(Map<String, dynamic> json) =>
+      _$_$_ObjectiveFromJson(json);
+
+  @override
+  final String id;
+  @override
+  final int sortIndex;
+  @override
+  final String title;
+  @override
+  final List<KeyResult> keyResults;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'Objective(id: $id, sortIndex: $sortIndex, title: $title, keyResults: $keyResults)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'Objective'))
+      ..add(DiagnosticsProperty('id', id))
+      ..add(DiagnosticsProperty('sortIndex', sortIndex))
+      ..add(DiagnosticsProperty('title', title))
+      ..add(DiagnosticsProperty('keyResults', keyResults));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is _Objective &&
+            (identical(other.id, id) ||
+                const DeepCollectionEquality().equals(other.id, id)) &&
+            (identical(other.sortIndex, sortIndex) ||
+                const DeepCollectionEquality()
+                    .equals(other.sortIndex, sortIndex)) &&
+            (identical(other.title, title) ||
+                const DeepCollectionEquality().equals(other.title, title)) &&
+            (identical(other.keyResults, keyResults) ||
+                const DeepCollectionEquality()
+                    .equals(other.keyResults, keyResults)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(id) ^
+      const DeepCollectionEquality().hash(sortIndex) ^
+      const DeepCollectionEquality().hash(title) ^
+      const DeepCollectionEquality().hash(keyResults);
+
+  @override
+  _$ObjectiveCopyWith<_Objective> get copyWith =>
+      __$ObjectiveCopyWithImpl<_Objective>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$_$_ObjectiveToJson(this);
+  }
+}
+
+abstract class _Objective implements Objective {
+  const factory _Objective(
+          String id, int sortIndex, String title, List<KeyResult> keyResults) =
+      _$_Objective;
+
+  factory _Objective.fromJson(Map<String, dynamic> json) =
+      _$_Objective.fromJson;
+
+  @override
+  String get id;
+  @override
+  int get sortIndex;
+  @override
+  String get title;
+  @override
+  List<KeyResult> get keyResults;
+  @override
+  _$ObjectiveCopyWith<_Objective> get copyWith;
 }
