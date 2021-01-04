@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:okr/global/service_locator.dart';
 import 'package:okr/screens/landing_screen.dart';
 
 void main() async {
+  generalSetup();
   runApp(MyApp());
 }
+
+final Color darkBlue = Color.fromARGB(255, 18, 32, 47);
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'OKRs',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
       home: MyHomePage(title: 'Objective Key Results'),
     );
   }
@@ -32,7 +33,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Center(child: Text(widget.title)),
       ),
       body: LandingScreen(),
     );

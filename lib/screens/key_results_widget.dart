@@ -48,172 +48,184 @@ class _KeyResultsWidgetState extends State<KeyResultsWidget> {
             _progressControllers
                 .add(TextEditingController(text: element.progress.toString()));
           });
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Divider(),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: Row(
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Divider(),
+                Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('Key Result'),
-                    Text('Progress'),
+                    Text(
+                      'Key Result',
+                      style: Theme.of(context).textTheme.headline6,
+                    ),
+                    if (editMode) Spacer(),
+                    Text(
+                      'Progress',
+                      style: Theme.of(context).textTheme.headline6,
+                    ),
+                    if (editMode) Spacer(),
                   ],
                 ),
-              ),
-              Divider(
-                color: Theme.of(context).primaryColor,
-              ),
-              Expanded(
-                flex: 5,
-                child: ListView.separated(
-                  itemCount: _internalKeyResults.length,
-                  separatorBuilder: (_, __) {
-                    return Divider();
-                  },
-                  itemBuilder: (context, index) {
-                    var keyResult = _internalKeyResults[index];
-                    return Row(
-                      children: [
-                        Expanded(
-                          flex: 3,
-                          child: editMode
-                              ? TextFormField(
-                                  controller: _titleControllers[index],
-                                  decoration: InputDecoration(),
-                                )
-                              : Text(keyResult.title),
-                        ),
-                        Spacer(
-                          flex: 1,
-                        ),
-                        Expanded(
-                          flex: 2,
-                          child: editMode
-                              ? NumberInputPrefabbed.squaredButtons(
-                                  controller: _progressControllers[index],
-                                  initialValue: keyResult.progress,
-                                  min: 0,
-                                  max: 10,
-                                  incDecBgColor: Theme.of(context)
-                                      .accentColor
-                                      .withAlpha(150),
-                                  incIconSize: 22,
-                                  decIconSize: 22,
-                                  numberFieldDecoration: InputDecoration(
-                                    border: OutlineInputBorder(),
-                                  ),
-                                )
-                              : Stack(
-                                  alignment: Alignment.center,
-                                  children: [
-                                    CircularProgressIndicator(
-                                      value: keyResult.progress / 10,
-                                    ),
-                                    // Container(
-                                    //     height: 20,
-                                    //     width: 20,
-                                    //     child: ProgressWidget(
-                                    //         keyResult: keyResult)),
-                                    Text(keyResult.progress.toString())
-                                  ],
-                                ),
-                        ),
-                        if (editMode)
-                          Container(
-                            height: 50,
-                            child: VerticalDivider(
-                              width: 20,
-                            ),
-                          ),
-                        if (editMode)
-                          IconButton(
-                              icon: Icon(Icons.add),
-                              color: Theme.of(context).accentColor,
-                              onPressed: () {
-                                setState(() {
-                                  var newKeyResult = KeyResult('', 0.0);
-                                  _internalKeyResults.add(newKeyResult);
-                                  _titleControllers.add(TextEditingController(
-                                      text: newKeyResult.title));
-                                  _progressControllers.add(
-                                      TextEditingController(
-                                          text: newKeyResult.progress
-                                              .toString()));
-                                });
-                              },
-                              tooltip: 'Add key result'),
-                        if (editMode)
-                          IconButton(
-                              icon: Icon(Icons.delete),
-                              color: Colors.red,
-                              onPressed: () {
-                                if (_internalKeyResults.length != 1) {
-                                  setState(() {
-                                    _internalKeyResults.removeAt(index);
-                                    _titleControllers.removeAt(index);
-                                    _progressControllers.removeAt(index);
-                                  });
-                                }
-                              },
-                              tooltip: 'Remove key result'),
-                      ],
-                    );
-                  },
+                Divider(
+                  color: Theme.of(context).primaryColor,
                 ),
-              ),
-              Divider(),
-              if (editMode)
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    RaisedButton.icon(
-                        color: Theme.of(context).accentColor,
-                        onPressed: () {
-                          List<KeyResult> newKeyResults = [];
-                          for (int i = 0; i < _internalKeyResults.length; i++) {
-                            newKeyResults.add(KeyResult(
-                                _titleControllers[i].text,
-                                double.tryParse(_progressControllers[i].text)));
-                          }
-                          Objective newObjective = widget.objective.copyWith(
-                              title: widget.objectiveController.text,
-                              keyResults: newKeyResults);
-
-                          if (newObjective.id.contains('temp_')) {
-                            _objectivesManager
-                                .addObjectiveCommand(newObjective);
-                          } else {
-                            _objectivesManager
-                                .updateObjectiveCommand(newObjective);
-                          }
-                          widget.toggleEditModeCommand(false);
-                        },
-                        icon: Icon(Icons.add),
-                        label: Text('Save Objective')),
-                    RaisedButton.icon(
-                        color: Theme.of(context).accentColor,
-                        onPressed: () {
-                          _objectivesManager
-                              .cancelEditObjectiveCommand(widget.objective.id);
-                          widget.toggleEditModeCommand(false);
-                        },
-                        icon: Icon(Icons.cancel),
-                        label: Text('Cancel')),
-                    if (!widget.objective.id.contains('temp_'))
+                Expanded(
+                  flex: 5,
+                  child: ListView.separated(
+                    itemCount: _internalKeyResults.length,
+                    separatorBuilder: (_, __) {
+                      return Divider();
+                    },
+                    itemBuilder: (context, index) {
+                      var keyResult = _internalKeyResults[index];
+                      return Row(
+                        children: [
+                          Expanded(
+                            flex: 3,
+                            child: editMode
+                                ? TextFormField(
+                                    controller: _titleControllers[index],
+                                    decoration: InputDecoration(),
+                                  )
+                                : Text(keyResult.title),
+                          ),
+                          Spacer(
+                            flex: 1,
+                          ),
+                          Expanded(
+                            flex: 2,
+                            child: editMode
+                                ? NumberInputPrefabbed.squaredButtons(
+                                    controller: _progressControllers[index],
+                                    initialValue: keyResult.progress.toInt(),
+                                    min: 0,
+                                    max: 10,
+                                    isInt: true,
+                                    incIconSize: 22,
+                                    decIconSize: 22,
+                                    incDecBgColor:
+                                        Theme.of(context).primaryColor,
+                                    numberFieldDecoration: InputDecoration(),
+                                  )
+                                : Stack(
+                                    alignment: Alignment.center,
+                                    children: [
+                                      CircularProgressIndicator(
+                                        value: keyResult.progress / 10,
+                                      ),
+                                      // Container(
+                                      //     height: 20,
+                                      //     width: 20,
+                                      //     child: ProgressWidget(
+                                      //         keyResult: keyResult)),
+                                      Text(keyResult.progress.toString())
+                                    ],
+                                  ),
+                          ),
+                          // if (editMode)
+                          //   Container(
+                          //     height: 50,
+                          //     child: VerticalDivider(
+                          //       width: 20,
+                          //     ),
+                          //   ),
+                          if (editMode)
+                            IconButton(
+                                icon: Icon(Icons.add),
+                                color: Theme.of(context).accentColor,
+                                onPressed: () {
+                                  setState(() {
+                                    var newKeyResult = KeyResult('', 0.0);
+                                    _internalKeyResults.add(newKeyResult);
+                                    _titleControllers.add(TextEditingController(
+                                        text: newKeyResult.title));
+                                    _progressControllers.add(
+                                        TextEditingController(
+                                            text: newKeyResult.progress
+                                                .toString()));
+                                  });
+                                },
+                                tooltip: 'Add key result'),
+                          if (editMode)
+                            IconButton(
+                                icon: Icon(Icons.delete),
+                                color: Colors.red,
+                                onPressed: () {
+                                  if (_internalKeyResults.length != 1) {
+                                    setState(() {
+                                      _internalKeyResults.removeAt(index);
+                                      _titleControllers.removeAt(index);
+                                      _progressControllers.removeAt(index);
+                                    });
+                                  }
+                                },
+                                tooltip: 'Remove key result'),
+                        ],
+                      );
+                    },
+                  ),
+                ),
+                Divider(),
+                if (editMode)
+                  Wrap(
+                    alignment: WrapAlignment.start,
+                    // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    spacing: MediaQuery.of(context).size.width * 0.01,
+                    runSpacing: MediaQuery.of(context).size.width * 0.04,
+                    children: [
                       RaisedButton.icon(
                           color: Theme.of(context).accentColor,
                           onPressed: () {
-                            _objectivesManager
-                                .deleteObjective(widget.objective.id);
+                            List<KeyResult> newKeyResults = [];
+                            for (int i = 0;
+                                i < _internalKeyResults.length;
+                                i++) {
+                              newKeyResults.add(KeyResult(
+                                  _titleControllers[i].text,
+                                  double.tryParse(
+                                      _progressControllers[i].text)));
+                            }
+                            Objective newObjective = widget.objective.copyWith(
+                                title: widget.objectiveController.text,
+                                keyResults: newKeyResults);
+
+                            if (newObjective.id.contains('temp_')) {
+                              _objectivesManager
+                                  .addObjectiveCommand(newObjective);
+                            } else {
+                              _objectivesManager
+                                  .updateObjectiveCommand(newObjective);
+                            }
                             widget.toggleEditModeCommand(false);
                           },
-                          icon: Icon(Icons.delete),
-                          label: Text('Delete')),
-                  ],
-                ),
-            ],
+                          icon: Icon(Icons.save),
+                          label: Text('Save')),
+                      RaisedButton.icon(
+                          color: Theme.of(context).accentColor,
+                          onPressed: () {
+                            _objectivesManager.cancelEditObjectiveCommand(
+                                widget.objective.id);
+                            widget.toggleEditModeCommand(false);
+                          },
+                          icon: Icon(Icons.cancel),
+                          label: Text('Cancel')),
+                      if (!widget.objective.id.contains('temp_'))
+                        RaisedButton.icon(
+                            color: Theme.of(context).accentColor,
+                            onPressed: () {
+                              _objectivesManager
+                                  .deleteObjective(widget.objective.id);
+                              widget.toggleEditModeCommand(false);
+                            },
+                            icon: Icon(Icons.delete),
+                            label: Text('Delete')),
+                    ],
+                  ),
+              ],
+            ),
           );
         });
   }

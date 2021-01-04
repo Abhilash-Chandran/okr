@@ -49,30 +49,30 @@ class _ObjectiveWidgetState extends State<ObjectiveWidget> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Expanded(
-                            flex: 1,
-                            child: Row(
-                              children: [
-                                Expanded(
-                                  flex: 1,
-                                  child: !editMode
-                                      ? Text(widget.objective.title)
-                                      : TextFormField(
-                                          decoration: InputDecoration(
-                                            hintText: 'Objective',
-                                          ),
-                                          controller: _objectiveTitleController,
-                                          validator: (value) {
-                                            if (value.isEmpty) {
-                                              return 'Please enter an Objective';
-                                            }
-                                            return null;
-                                          },
-                                        ),
-                                ),
-                              ],
-                            )),
-                        Spacer(
-                          flex: 1,
+                          flex: 2,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 16.0, vertical: 8),
+                            child: !editMode
+                                ? Text(
+                                    widget.objective.title,
+                                    style:
+                                        Theme.of(context).textTheme.headline6,
+                                    maxLines: 2,
+                                  )
+                                : TextFormField(
+                                    decoration: InputDecoration(
+                                      hintText: 'Objective',
+                                    ),
+                                    controller: _objectiveTitleController,
+                                    validator: (value) {
+                                      if (value.isEmpty) {
+                                        return 'Please enter an Objective';
+                                      }
+                                      return null;
+                                    },
+                                  ),
+                          ),
                         ),
                         Expanded(
                           flex: 6,

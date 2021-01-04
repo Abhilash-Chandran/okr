@@ -1,14 +1,17 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
+import 'package:okr/models/common_data.dart';
+
 
 part 'objective.freezed.dart';
 part 'objective.g.dart';
 
 @freezed
-abstract class Objectives with _$Objectives {
-  const factory Objectives(List<Objective> objectives) = _Objectives;
-  factory Objectives.fromJson(Map<String, dynamic> json) =>
-      _$ObjectivesFromJson(json);
+abstract class UserData with _$UserData {
+  const factory UserData(FlexTheme flexTheme, List<Objective> objectives) =
+      _Objectives;
+  factory UserData.fromJson(Map<String, dynamic> json) =>
+      _$UserDataFromJson(json);
 }
 
 @freezed

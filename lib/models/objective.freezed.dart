@@ -8,78 +8,97 @@ part of 'objective.dart';
 // **************************************************************************
 
 T _$identity<T>(T value) => value;
-Objectives _$ObjectivesFromJson(Map<String, dynamic> json) {
+UserData _$UserDataFromJson(Map<String, dynamic> json) {
   return _Objectives.fromJson(json);
 }
 
 /// @nodoc
-class _$ObjectivesTearOff {
-  const _$ObjectivesTearOff();
+class _$UserDataTearOff {
+  const _$UserDataTearOff();
 
 // ignore: unused_element
-  _Objectives call(List<Objective> objectives) {
+  _Objectives call(FlexTheme flexTheme, List<Objective> objectives) {
     return _Objectives(
+      flexTheme,
       objectives,
     );
   }
 
 // ignore: unused_element
-  Objectives fromJson(Map<String, Object> json) {
-    return Objectives.fromJson(json);
+  UserData fromJson(Map<String, Object> json) {
+    return UserData.fromJson(json);
   }
 }
 
 /// @nodoc
 // ignore: unused_element
-const $Objectives = _$ObjectivesTearOff();
+const $UserData = _$UserDataTearOff();
 
 /// @nodoc
-mixin _$Objectives {
+mixin _$UserData {
+  FlexTheme get flexTheme;
   List<Objective> get objectives;
 
   Map<String, dynamic> toJson();
-  $ObjectivesCopyWith<Objectives> get copyWith;
+  $UserDataCopyWith<UserData> get copyWith;
 }
 
 /// @nodoc
-abstract class $ObjectivesCopyWith<$Res> {
-  factory $ObjectivesCopyWith(
-          Objectives value, $Res Function(Objectives) then) =
-      _$ObjectivesCopyWithImpl<$Res>;
-  $Res call({List<Objective> objectives});
+abstract class $UserDataCopyWith<$Res> {
+  factory $UserDataCopyWith(UserData value, $Res Function(UserData) then) =
+      _$UserDataCopyWithImpl<$Res>;
+  $Res call({FlexTheme flexTheme, List<Objective> objectives});
+
+  $FlexThemeCopyWith<$Res> get flexTheme;
 }
 
 /// @nodoc
-class _$ObjectivesCopyWithImpl<$Res> implements $ObjectivesCopyWith<$Res> {
-  _$ObjectivesCopyWithImpl(this._value, this._then);
+class _$UserDataCopyWithImpl<$Res> implements $UserDataCopyWith<$Res> {
+  _$UserDataCopyWithImpl(this._value, this._then);
 
-  final Objectives _value;
+  final UserData _value;
   // ignore: unused_field
-  final $Res Function(Objectives) _then;
+  final $Res Function(UserData) _then;
 
   @override
   $Res call({
+    Object flexTheme = freezed,
     Object objectives = freezed,
   }) {
     return _then(_value.copyWith(
+      flexTheme:
+          flexTheme == freezed ? _value.flexTheme : flexTheme as FlexTheme,
       objectives: objectives == freezed
           ? _value.objectives
           : objectives as List<Objective>,
     ));
   }
+
+  @override
+  $FlexThemeCopyWith<$Res> get flexTheme {
+    if (_value.flexTheme == null) {
+      return null;
+    }
+    return $FlexThemeCopyWith<$Res>(_value.flexTheme, (value) {
+      return _then(_value.copyWith(flexTheme: value));
+    });
+  }
 }
 
 /// @nodoc
-abstract class _$ObjectivesCopyWith<$Res> implements $ObjectivesCopyWith<$Res> {
+abstract class _$ObjectivesCopyWith<$Res> implements $UserDataCopyWith<$Res> {
   factory _$ObjectivesCopyWith(
           _Objectives value, $Res Function(_Objectives) then) =
       __$ObjectivesCopyWithImpl<$Res>;
   @override
-  $Res call({List<Objective> objectives});
+  $Res call({FlexTheme flexTheme, List<Objective> objectives});
+
+  @override
+  $FlexThemeCopyWith<$Res> get flexTheme;
 }
 
 /// @nodoc
-class __$ObjectivesCopyWithImpl<$Res> extends _$ObjectivesCopyWithImpl<$Res>
+class __$ObjectivesCopyWithImpl<$Res> extends _$UserDataCopyWithImpl<$Res>
     implements _$ObjectivesCopyWith<$Res> {
   __$ObjectivesCopyWithImpl(
       _Objectives _value, $Res Function(_Objectives) _then)
@@ -90,9 +109,11 @@ class __$ObjectivesCopyWithImpl<$Res> extends _$ObjectivesCopyWithImpl<$Res>
 
   @override
   $Res call({
+    Object flexTheme = freezed,
     Object objectives = freezed,
   }) {
     return _then(_Objectives(
+      flexTheme == freezed ? _value.flexTheme : flexTheme as FlexTheme,
       objectives == freezed ? _value.objectives : objectives as List<Objective>,
     ));
   }
@@ -102,24 +123,29 @@ class __$ObjectivesCopyWithImpl<$Res> extends _$ObjectivesCopyWithImpl<$Res>
 
 /// @nodoc
 class _$_Objectives with DiagnosticableTreeMixin implements _Objectives {
-  const _$_Objectives(this.objectives) : assert(objectives != null);
+  const _$_Objectives(this.flexTheme, this.objectives)
+      : assert(flexTheme != null),
+        assert(objectives != null);
 
   factory _$_Objectives.fromJson(Map<String, dynamic> json) =>
       _$_$_ObjectivesFromJson(json);
 
   @override
+  final FlexTheme flexTheme;
+  @override
   final List<Objective> objectives;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Objectives(objectives: $objectives)';
+    return 'UserData(flexTheme: $flexTheme, objectives: $objectives)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'Objectives'))
+      ..add(DiagnosticsProperty('type', 'UserData'))
+      ..add(DiagnosticsProperty('flexTheme', flexTheme))
       ..add(DiagnosticsProperty('objectives', objectives));
   }
 
@@ -127,6 +153,9 @@ class _$_Objectives with DiagnosticableTreeMixin implements _Objectives {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _Objectives &&
+            (identical(other.flexTheme, flexTheme) ||
+                const DeepCollectionEquality()
+                    .equals(other.flexTheme, flexTheme)) &&
             (identical(other.objectives, objectives) ||
                 const DeepCollectionEquality()
                     .equals(other.objectives, objectives)));
@@ -134,7 +163,9 @@ class _$_Objectives with DiagnosticableTreeMixin implements _Objectives {
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(objectives);
+      runtimeType.hashCode ^
+      const DeepCollectionEquality().hash(flexTheme) ^
+      const DeepCollectionEquality().hash(objectives);
 
   @override
   _$ObjectivesCopyWith<_Objectives> get copyWith =>
@@ -146,12 +177,15 @@ class _$_Objectives with DiagnosticableTreeMixin implements _Objectives {
   }
 }
 
-abstract class _Objectives implements Objectives {
-  const factory _Objectives(List<Objective> objectives) = _$_Objectives;
+abstract class _Objectives implements UserData {
+  const factory _Objectives(FlexTheme flexTheme, List<Objective> objectives) =
+      _$_Objectives;
 
   factory _Objectives.fromJson(Map<String, dynamic> json) =
       _$_Objectives.fromJson;
 
+  @override
+  FlexTheme get flexTheme;
   @override
   List<Objective> get objectives;
   @override

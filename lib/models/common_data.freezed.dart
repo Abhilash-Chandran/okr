@@ -8,147 +8,169 @@ part of 'common_data.dart';
 // **************************************************************************
 
 T _$identity<T>(T value) => value;
+FlexTheme _$FlexThemeFromJson(Map<String, dynamic> json) {
+  return _FlexTheme.fromJson(json);
+}
 
 /// @nodoc
-class _$ToggleEditTearOff {
-  const _$ToggleEditTearOff();
+class _$FlexThemeTearOff {
+  const _$FlexThemeTearOff();
 
 // ignore: unused_element
-  _ToggleEdit call({String objectiveId, bool editMode}) {
-    return _ToggleEdit(
-      objectiveId: objectiveId,
-      editMode: editMode,
+  _FlexTheme call({@required ThemeMode themeMode, @required int themeIndex}) {
+    return _FlexTheme(
+      themeMode: themeMode,
+      themeIndex: themeIndex,
     );
   }
+
+// ignore: unused_element
+  FlexTheme fromJson(Map<String, Object> json) {
+    return FlexTheme.fromJson(json);
+  }
 }
 
 /// @nodoc
 // ignore: unused_element
-const $ToggleEdit = _$ToggleEditTearOff();
+const $FlexTheme = _$FlexThemeTearOff();
 
 /// @nodoc
-mixin _$ToggleEdit {
-  String get objectiveId;
-  bool get editMode;
+mixin _$FlexTheme {
+  ThemeMode get themeMode;
+  int get themeIndex;
 
-  $ToggleEditCopyWith<ToggleEdit> get copyWith;
+  Map<String, dynamic> toJson();
+  $FlexThemeCopyWith<FlexTheme> get copyWith;
 }
 
 /// @nodoc
-abstract class $ToggleEditCopyWith<$Res> {
-  factory $ToggleEditCopyWith(
-          ToggleEdit value, $Res Function(ToggleEdit) then) =
-      _$ToggleEditCopyWithImpl<$Res>;
-  $Res call({String objectiveId, bool editMode});
+abstract class $FlexThemeCopyWith<$Res> {
+  factory $FlexThemeCopyWith(FlexTheme value, $Res Function(FlexTheme) then) =
+      _$FlexThemeCopyWithImpl<$Res>;
+  $Res call({ThemeMode themeMode, int themeIndex});
 }
 
 /// @nodoc
-class _$ToggleEditCopyWithImpl<$Res> implements $ToggleEditCopyWith<$Res> {
-  _$ToggleEditCopyWithImpl(this._value, this._then);
+class _$FlexThemeCopyWithImpl<$Res> implements $FlexThemeCopyWith<$Res> {
+  _$FlexThemeCopyWithImpl(this._value, this._then);
 
-  final ToggleEdit _value;
+  final FlexTheme _value;
   // ignore: unused_field
-  final $Res Function(ToggleEdit) _then;
+  final $Res Function(FlexTheme) _then;
 
   @override
   $Res call({
-    Object objectiveId = freezed,
-    Object editMode = freezed,
+    Object themeMode = freezed,
+    Object themeIndex = freezed,
   }) {
     return _then(_value.copyWith(
-      objectiveId:
-          objectiveId == freezed ? _value.objectiveId : objectiveId as String,
-      editMode: editMode == freezed ? _value.editMode : editMode as bool,
+      themeMode:
+          themeMode == freezed ? _value.themeMode : themeMode as ThemeMode,
+      themeIndex: themeIndex == freezed ? _value.themeIndex : themeIndex as int,
     ));
   }
 }
 
 /// @nodoc
-abstract class _$ToggleEditCopyWith<$Res> implements $ToggleEditCopyWith<$Res> {
-  factory _$ToggleEditCopyWith(
-          _ToggleEdit value, $Res Function(_ToggleEdit) then) =
-      __$ToggleEditCopyWithImpl<$Res>;
+abstract class _$FlexThemeCopyWith<$Res> implements $FlexThemeCopyWith<$Res> {
+  factory _$FlexThemeCopyWith(
+          _FlexTheme value, $Res Function(_FlexTheme) then) =
+      __$FlexThemeCopyWithImpl<$Res>;
   @override
-  $Res call({String objectiveId, bool editMode});
+  $Res call({ThemeMode themeMode, int themeIndex});
 }
 
 /// @nodoc
-class __$ToggleEditCopyWithImpl<$Res> extends _$ToggleEditCopyWithImpl<$Res>
-    implements _$ToggleEditCopyWith<$Res> {
-  __$ToggleEditCopyWithImpl(
-      _ToggleEdit _value, $Res Function(_ToggleEdit) _then)
-      : super(_value, (v) => _then(v as _ToggleEdit));
+class __$FlexThemeCopyWithImpl<$Res> extends _$FlexThemeCopyWithImpl<$Res>
+    implements _$FlexThemeCopyWith<$Res> {
+  __$FlexThemeCopyWithImpl(_FlexTheme _value, $Res Function(_FlexTheme) _then)
+      : super(_value, (v) => _then(v as _FlexTheme));
 
   @override
-  _ToggleEdit get _value => super._value as _ToggleEdit;
+  _FlexTheme get _value => super._value as _FlexTheme;
 
   @override
   $Res call({
-    Object objectiveId = freezed,
-    Object editMode = freezed,
+    Object themeMode = freezed,
+    Object themeIndex = freezed,
   }) {
-    return _then(_ToggleEdit(
-      objectiveId:
-          objectiveId == freezed ? _value.objectiveId : objectiveId as String,
-      editMode: editMode == freezed ? _value.editMode : editMode as bool,
+    return _then(_FlexTheme(
+      themeMode:
+          themeMode == freezed ? _value.themeMode : themeMode as ThemeMode,
+      themeIndex: themeIndex == freezed ? _value.themeIndex : themeIndex as int,
     ));
   }
 }
 
+@JsonSerializable()
+
 /// @nodoc
-class _$_ToggleEdit with DiagnosticableTreeMixin implements _ToggleEdit {
-  const _$_ToggleEdit({this.objectiveId, this.editMode});
+class _$_FlexTheme with DiagnosticableTreeMixin implements _FlexTheme {
+  const _$_FlexTheme({@required this.themeMode, @required this.themeIndex})
+      : assert(themeMode != null),
+        assert(themeIndex != null);
+
+  factory _$_FlexTheme.fromJson(Map<String, dynamic> json) =>
+      _$_$_FlexThemeFromJson(json);
 
   @override
-  final String objectiveId;
+  final ThemeMode themeMode;
   @override
-  final bool editMode;
+  final int themeIndex;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ToggleEdit(objectiveId: $objectiveId, editMode: $editMode)';
+    return 'FlexTheme(themeMode: $themeMode, themeIndex: $themeIndex)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'ToggleEdit'))
-      ..add(DiagnosticsProperty('objectiveId', objectiveId))
-      ..add(DiagnosticsProperty('editMode', editMode));
+      ..add(DiagnosticsProperty('type', 'FlexTheme'))
+      ..add(DiagnosticsProperty('themeMode', themeMode))
+      ..add(DiagnosticsProperty('themeIndex', themeIndex));
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _ToggleEdit &&
-            (identical(other.objectiveId, objectiveId) ||
+        (other is _FlexTheme &&
+            (identical(other.themeMode, themeMode) ||
                 const DeepCollectionEquality()
-                    .equals(other.objectiveId, objectiveId)) &&
-            (identical(other.editMode, editMode) ||
+                    .equals(other.themeMode, themeMode)) &&
+            (identical(other.themeIndex, themeIndex) ||
                 const DeepCollectionEquality()
-                    .equals(other.editMode, editMode)));
+                    .equals(other.themeIndex, themeIndex)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(objectiveId) ^
-      const DeepCollectionEquality().hash(editMode);
+      const DeepCollectionEquality().hash(themeMode) ^
+      const DeepCollectionEquality().hash(themeIndex);
 
   @override
-  _$ToggleEditCopyWith<_ToggleEdit> get copyWith =>
-      __$ToggleEditCopyWithImpl<_ToggleEdit>(this, _$identity);
+  _$FlexThemeCopyWith<_FlexTheme> get copyWith =>
+      __$FlexThemeCopyWithImpl<_FlexTheme>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$_$_FlexThemeToJson(this);
+  }
 }
 
-abstract class _ToggleEdit implements ToggleEdit {
-  const factory _ToggleEdit({String objectiveId, bool editMode}) =
-      _$_ToggleEdit;
+abstract class _FlexTheme implements FlexTheme {
+  const factory _FlexTheme(
+      {@required ThemeMode themeMode, @required int themeIndex}) = _$_FlexTheme;
+
+  factory _FlexTheme.fromJson(Map<String, dynamic> json) =
+      _$_FlexTheme.fromJson;
 
   @override
-  String get objectiveId;
+  ThemeMode get themeMode;
   @override
-  bool get editMode;
+  int get themeIndex;
   @override
-  _$ToggleEditCopyWith<_ToggleEdit> get copyWith;
+  _$FlexThemeCopyWith<_FlexTheme> get copyWith;
 }

@@ -8,6 +8,9 @@ part of 'objective.dart';
 
 _$_Objectives _$_$_ObjectivesFromJson(Map<String, dynamic> json) {
   return _$_Objectives(
+    json['flexTheme'] == null
+        ? null
+        : FlexTheme.fromJson(json['flexTheme'] as Map<String, dynamic>),
     (json['objectives'] as List)
         ?.map((e) =>
             e == null ? null : Objective.fromJson(e as Map<String, dynamic>))
@@ -17,6 +20,7 @@ _$_Objectives _$_$_ObjectivesFromJson(Map<String, dynamic> json) {
 
 Map<String, dynamic> _$_$_ObjectivesToJson(_$_Objectives instance) =>
     <String, dynamic>{
+      'flexTheme': instance.flexTheme,
       'objectives': instance.objectives,
     };
 

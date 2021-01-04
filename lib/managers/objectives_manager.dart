@@ -7,24 +7,36 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
 
 class ObjectivesManager {
+  /// Creates a dummy [Objective] while creating a new objective.
   Command<void, bool> initiateNewObjectiveCommand;
+
+  /// Inserts the new [Objective].
   Command<Objective, bool> addObjectiveCommand;
+
+  /// Updates the existing [Objective].
   Command<Objective, bool> updateObjectiveCommand;
+
+  /// Deletes the [Objective].
   Command<String, bool> deleteObjectiveCommand;
-  Command<Objective, Objective> addKeyResultCommand;
-  Command<void, Objectives> loadAllObjectivesCommand;
+
+  /// Loads all the [Objective] stored for a [userName].
+  Command<void, UserData> loadAllObjectivesCommand;
+
+  /// Disperse the cancel edit command of individual objective in the UI.
   Command<String, bool> cancelEditObjectiveCommand;
-  String user;
+
+  /// Currently active user.
+  String userName;
 
   SharedPreferences _prefs;
 
-  ObjectivesManager(this.user) {
+  ObjectivesManager(this.userName) {
     this.addObjectiveCommand =
         Command.createAsync<Objective, bool>(addObjective, null);
     this.updateObjectiveCommand =
         Command.createAsync<Objective, bool>(updateObjective, null);
     this.loadAllObjectivesCommand =
-        Command.createAsyncNoParam<Objectives>(loadAllObjectives, null);
+        Command.createAsyncNoParam<UserData>(loadAllObjectives, null);
     this.initiateNewObjectiveCommand =
         Command.createAsyncNoParam<bool>(initiateNewObjective, null);
     this.deleteObjectiveCommand =
@@ -42,13 +54,15 @@ class ObjectivesManager {
         newObjective = newObjective.copyWith(
             id: newObjective.id.replaceFirst('temp_', ''));
       }
-      String objectives = await _prefs.get(this.user);
-      var old_objectives = Objectives.fromJson(jsonDecode(objectives));
-      old_objectives.objectives.add(newObjective);
-      Objectives new_objectives =
-          old_objectives.copyWith(objectives: old_objectives.objectives);
+      String userData = await _prefs.get(this.userName);
+      var old_userData = UserData.fromJson(jsonDecode(userData));
+      old_userData.objectives.add(newObjective);
+      UserData new_userData =
+          old_userData.copyWith(objectives: old_userData.objectives);
       bool saveSuccess = await _prefs.setString(
-          this.user, json.encode(new_objectives.toJson()));
+          this.userName, json.encode(new_userData.toJson()));
+      // Reloads the all the objectives in UI. This needs to be delayed by a
+      // frame somhow for correct results :( not sure why.
       Future.delayed(
           Duration(milliseconds: 16), () => loadAllObjectivesCommand());
       return saveSuccess;
@@ -58,15 +72,17 @@ class ObjectivesManager {
 
   Future<bool> updateObjective(Objective updatedObjective) async {
     if (updatedObjective != null) {
-      String objectives = await _prefs.get(this.user);
-      var old_objectives = Objectives.fromJson(jsonDecode(objectives));
-      old_objectives.objectives
+      String userData = await _prefs.get(this.userName);
+      var old_userData = UserData.fromJson(jsonDecode(userData));
+      old_userData.objectives
           .removeWhere((element) => element.id == updatedObjective.id);
-      old_objectives.objectives.add(updatedObjective);
-      Objectives new_objectives =
-          old_objectives.copyWith(objectives: old_objectives.objectives);
+      old_userData.objectives.add(updatedObjective);
+      UserData new_userData =
+          old_userData.copyWith(objectives: old_userData.objectives);
       bool saveSuccess = await _prefs.setString(
-          this.user, json.encode(new_objectives.toJson()));
+          this.userName, json.encode(new_userData.toJson()));
+      // Reloads the all the objectives in UI. This needs to be delayed by a
+      // frame somhow for correct results :( not sure why.
       Future.delayed(Duration(milliseconds: 16),
           () async => await loadAllObjectivesCommand());
       return saveSuccess;
@@ -74,10 +90,10 @@ class ObjectivesManager {
     return false;
   }
 
-  Future<Objectives> loadAllObjectives() async {
-    String objectives = await _prefs.getString(this.user);
-    if (objectives != null) {
-      Objectives result = Objectives.fromJson(jsonDecode(objectives));
+  Future<UserData> loadAllObjectives() async {
+    String userData = await _prefs.getString(this.userName);
+    if (userData != null) {
+      UserData result = UserData.fromJson(jsonDecode(userData));
       result.objectives.sort((a, b) => a.sortIndex.compareTo(b.sortIndex));
       return result;
     }
@@ -88,16 +104,17 @@ class ObjectivesManager {
     Uuid uuid = Uuid();
     String new_id = uuid.v4();
 
-    String objectives = await _prefs.get(this.user);
-    var old_objectives = Objectives.fromJson(jsonDecode(objectives));
+    String userData = await _prefs.get(this.userName);
+    var old_userData = UserData.fromJson(jsonDecode(userData));
     Objective newObjective =
-        Objective('temp_' + new_id, old_objectives.objectives.length, '', []);
-    old_objectives.objectives.add(newObjective);
-    Objectives new_objectives =
-        old_objectives.copyWith(objectives: old_objectives.objectives);
-    bool saveSuccess =
-        await _prefs.setString(this.user, json.encode(new_objectives.toJson()));
-    // // reload the objectives.
+        Objective('temp_' + new_id, old_userData.objectives.length, '', []);
+    old_userData.objectives.add(newObjective);
+    UserData new_userData =
+        old_userData.copyWith(objectives: old_userData.objectives);
+    bool saveSuccess = await _prefs.setString(
+        this.userName, json.encode(new_userData.toJson()));
+    // Reloads the all the objectives in UI. This needs to be delayed by a
+    // frame somhow for correct results :( not sure why.
     Future.delayed(
         Duration(milliseconds: 16), () => loadAllObjectivesCommand());
     return saveSuccess;
@@ -105,13 +122,15 @@ class ObjectivesManager {
 
   Future<bool> deleteObjective(String objectiveId) async {
     if (objectiveId != null) {
-      String objectives = await _prefs.get(this.user);
-      var old_objectives = Objectives.fromJson(jsonDecode(objectives));
-      old_objectives.objectives
+      String userData = await _prefs.get(this.userName);
+      var old_userData = UserData.fromJson(jsonDecode(userData));
+      old_userData.objectives
           .removeWhere((objective) => objective.id == objectiveId);
-      Objectives new_objectives =
-          old_objectives.copyWith(objectives: old_objectives.objectives);
-      await _prefs.setString(this.user, json.encode(new_objectives.toJson()));
+      UserData new_userData =
+          old_userData.copyWith(objectives: old_userData.objectives);
+      await _prefs.setString(this.userName, json.encode(new_userData.toJson()));
+      // Reloads the all the objectives in UI. This needs to be delayed by a
+      // frame somhow for correct results :( not sure why.
       Future.delayed(
           Duration(milliseconds: 16), () => loadAllObjectivesCommand());
       return true;
@@ -124,7 +143,7 @@ class ObjectivesManager {
         objectiveId.isNotEmpty &&
         objectiveId.contains('temp_')) {
       return await deleteObjective(objectiveId);
-    }    
+    }
     return true;
   }
 }
